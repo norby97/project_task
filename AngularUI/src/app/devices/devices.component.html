@@ -1,0 +1,38 @@
+
+<table class="table table-borderless">
+  <thead class="thead-success">
+  <th>Name</th>
+  <th>Manufacturer</th>
+  <th>Type</th>
+  <th>Operating System</th>
+  <th>OS Version</th>
+  <th>Processor</th>
+  <th>RAM</th>
+  <th>Owner</th>
+  <th>
+    <a class="btn btn-sm btn-success text-white" (click)="AddEditDevice(null,service.formData.DeviceID)"><i class="fa fa-plus"></i> Add device</a>
+  </th>
+  </thead>
+  <tbody>
+    <tr *ngIf="service.deviceList?.length == 0">
+      <td class="font-italic text-center" colspan="10">
+        There are no devices at the moment in the database.
+      </td>
+    </tr>
+    <tr *ngFor="let device of service.deviceList; let i= index;">
+      <td>{{device.DName}}</td>
+      <td>{{device.Manufacturer}}</td>
+      <td>{{device.DType}}</td>
+      <td>{{device.OS}}</td>
+      <td>{{device.OSVersion}}</td>
+      <td>{{device.Processor}}</td>
+      <td>{{device.RAM}} GB</td>
+      <td>{{user}}</td>
+      <td><a class="btn btn-sm btn-info text-white" (click)="AddEditDevice(i ,service.deviceList[i].DeviceID )"><i class="fa fa-pencil"></i></a>
+          <a class="btn btn-sm btn-danger text-white" (click)="DeleteDevice(device.DeviceID)"><i class="fa fa-trash"></i></a>
+      </td>
+    </tr>
+
+  </tbody>
+</table>
+

@@ -1,0 +1,41 @@
+<div class="row mt-4">
+    <div class="col-md-12">
+         <form [formGroup]=service.formModel autocomplete="off" (submit)="onSubmit()">
+             <div class="form-group required">
+                <label>UserName</label>
+                <input class="form-control" formControlName="UserName" (keyup)="checkUserName($event)">
+                <label class="text-danger" *ngIf="service.formModel.get('UserName').touched && service.formModel.get('UserName').errors?.required   ">Please provide a username!</label>
+                <label class="text-danger" *ngIf="!validuser">Username already taken!</label>
+            </div>
+             <div class="form-group required">
+                <label>Email</label>
+                <input class="form-control" formControlName="Email">
+                <label class="text-danger" *ngIf="service.formModel.get('Email').touched && service.formModel.get('Email').errors?.email">Not a valid email address!</label>
+            </div>
+             <div class="form-group">
+                <label>Full Name</label>
+                <input class="form-control" formControlName="FullName">
+            </div>
+             <div formGroupName = "Passwords">
+                <div class="form-group required">
+                    <label>Password </label>
+                    <input class="form-control" type="password" formControlName="Password">
+                    <label class="text-danger" *ngIf="service.formModel.get('Passwords.Password').touched && service.formModel.get('Passwords.Password').errors?.required">Please provide a password!</label>
+                    <label class="text-danger" *ngIf="service.formModel.get('Passwords.Password').touched && service.formModel.get('Passwords.Password').errors?.minlegth">Password is too short!</label>
+                </div>
+                <div class="form-group required">
+                    <label>Confirm Password</label>
+                    <input class="form-control"  type="password" formControlName="ConfirmPassword">
+                    <label class="text-danger" *ngIf="service.formModel.get('Passwords.ConfirmPassword').touched && service.formModel.get('Passwords.ConfirmPassword').errors?.required">Please confirm your password!</label>
+                    <label class="text-danger" *ngIf="service.formModel.get('Passwords.Password').value != service.formModel.get('Passwords.ConfirmPassword').value">Please confirm your password!</label>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-8 offset-md-2">
+                    <button type="submit" class="btn btn-lg btn-block" [disabled]="!service.formModel.valid && !validuser">Add new user</button>
+
+                </div>
+            </div>
+         </form>
+    </div> 
+</div>

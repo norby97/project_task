@@ -1,0 +1,59 @@
+<h4 class="dispaly-4">Device Properties</h4>
+<hr>
+<form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+  <input type="hidden" name="DeviceID" #DeviceID="ngModel" [(ngModel)]="formData.DeviceID">
+  
+    <div class="form-group">
+      <label>Device name</label>
+      <input name="DName" #DName="ngModel" [(ngModel)]=" formData.DName" class="form-control" [class.is-invalid]="!isValid &&  formData.DName == ''">
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label>Manufacturer</label>
+        <div class="input-group">
+          <input name="Manufacturer" #Manufacturer="ngModel" [(ngModel)]=" formData.Manufacturer" class="form-control" [class.is-invalid]="!isValid &&  formData.Manufacturer == '' ">
+        </div>
+        <label>Device Processor</label>
+        <div class="input-group">
+          <input name="Processor" #Processor="ngModel" [(ngModel)]=" formData.Processor" class="form-control" [class.is-invalid]="!isValid &&  formData.Processor == ''">
+        </div>
+        <label>Device OS Version</label>
+        <div class="input-group">
+          <input name="OSVersion" #OSVersion="ngModel" [(ngModel)]=" formData.OSVersion" class="form-control" [class.is-invalid]="!isValid &&  formData.OSVersion == 0">
+        </div>
+        
+      </div>
+      <div class="form-group col-md-6">
+        <label>Device Type</label>
+        <select name="DType" #DType="ngModel" [(ngModel)]=" formData.DType" class="form-control" [class.is-invalid]="!isValid &&  formData.DType == 0 ">
+          <option value="0">-- Select Type- -</option>
+          <option value="Phone">Phone</option>
+          <option value="Tablet">Tablet</option>
+        </select>
+        <label>Device OS</label>
+        <select name="OS" #OS="ngModel" [(ngModel)]=" formData.OS" class="form-control" [class.is-invalid]="!isValid &&  formData.OS == 0">
+          <option value="0">-- Select OS- -</option>
+          <option value="Android">Android</option>
+          <option value="iOs">iOs</option>
+        </select>
+        <label>Device RAM</label>
+        <select name="RAM" #RAM="ngModel" [(ngModel)]=" formData.RAM" class="form-control" [class.is-invalid]="!isValid &&  formData.RAM == 0">
+          <option value="0">-- Select RAM- -</option>
+          <option value="2">2 GB</option>
+          <option value="4">4 GB</option>
+          <option value="8">8 GB</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Device Owner</label>
+      <select name="UserID" #UserID="ngModel" [(ngModel)]=" formData.UserID" class="form-control" [class.is-invalid]="!isValid &&  formData.UserID == 0">
+        <option value=0>-- Select owner - -</option>
+        <option *ngFor="let user of userList" value="{{user.UserID}}">{{user.UserName}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <button type="submit" class="btn btn-dark"><i class="fa fa-database"></i> Submit</button>
+      <button type="button" class="btn btn-outline-dark ml-1" [mat-dialog-close]><i class="fa fa-close"></i> Close</button>
+    </div>
+</form>

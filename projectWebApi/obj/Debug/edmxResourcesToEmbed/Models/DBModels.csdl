@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ProjectTaskModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Device">
+    <Key>
+      <PropertyRef Name="DeviceID" />
+    </Key>
+    <Property Name="DeviceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Manufacturer" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="DType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="OS" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="OSVersion" Type="Int32" />
+    <Property Name="Processor" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="RAM" Type="Int32" />
+    <Property Name="UserID" Type="Int32" />
+    <NavigationProperty Name="User" Relationship="Self.User_FK" FromRole="Devices" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="FullName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="UserRole" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="UserLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Devices" Relationship="Self.User_FK" FromRole="Users" ToRole="Devices" />
+  </EntityType>
+  <Association Name="User_FK">
+    <End Role="Users" Type="Self.User" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Devices" Type="Self.Device" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Devices">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ProjectTaskEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Devices" EntityType="Self.Device" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <AssociationSet Name="User_FK" Association="Self.User_FK">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Devices" EntitySet="Devices" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

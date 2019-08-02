@@ -1,0 +1,13 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\devices",
+    "\\src\\app\\devices\\device",
+    "\\src\\app\\shared",
+    "\\src\\environments"
+  ],
+  "SelectedNode": "\\src\\app\\shared\\device.service.ts",
+  "PreviewInSolutionExplorer": false
+}
